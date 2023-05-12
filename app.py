@@ -33,10 +33,10 @@ layer_rules = {
 		'Polylines':{"color":"red","opacity":1,"weight":15,'label':False},
 	},
 	"Frick Unit Areas":{
-		'Polygons':{"color":"orange","fill_color":"blue","fill_opacity":0.5,"weight":8,"opacity":0.5,'label':True,'font_size':12},
+		'Polygons':{"color":"orange","fill_opacity":0.5,"weight":8,"opacity":0.5,'label':True,'font_size':8},
 	},
 	"Frick Unit":{
-		'Points':{"color":"purple",'label':True,'font_size':8},
+		'Points':{"color":"purple",'label':True,'font_size':10},
 		'Polylines':{"color":"pink","weight":8,'label':False},
 		'Polygons':{"color":"green","fill_color":"green","weight":10,"fill":False,"opacity":0.5,'label':False},
 	},

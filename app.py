@@ -34,6 +34,7 @@ layer_rules = {
 	},
 	"Frick Unit Areas":{
 		'Polygons':{"color":"orange","fill_opacity":0.5,"weight":8,"opacity":0.5,'label':True,'font_size':8},
+		'Points':{"color":"blue",'label':True,'font_size':10},
 	},
 	"Frick Unit":{
 		'Points':{"color":"purple",'label':True,'font_size':10},
@@ -48,6 +49,8 @@ layer_rules = {
 for gdb in gdbs:
 	for layer in gdbs[gdb]:
 		gdf = gdbs[gdb][layer]
+		# st.markdown(f"## {gdb}: {layer}")
+		# st.markdown(f"## {gdb}: {layer}")
 		options = layer_rules[gdb][layer]
 		M.map.add_gdf(
 		gdf,

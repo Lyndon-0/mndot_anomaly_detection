@@ -150,6 +150,7 @@ def make_map(full_gdf,apns):
 			"Frick Unit Service Area": "salmon",
 			"District Boundary": "#000000",
 			"Proposed Turnout": "#ffff00",
+			"APN": "white",
 		}
 	)
 

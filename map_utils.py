@@ -37,10 +37,16 @@ def make_map(full_gdf):
 		m.add_gdf(
 			gdf,
 			layer_name=layer,
+						# style_function=lambda x: {"color": "red", "fillOpacity": 0},
+			fields=['layer'],
+			highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 8, "color": "lightgreen"},
 			style={
 				'color':color,
 				'fillColor':"none",
 				},
+			# highlight_function=lambda x: x['properties'],
+			# highlight_function=lambda x: {"l":x['properties']['label']},
+			# highlight_function=lambda x: {"l":x['properties']['label']},
 			)
 
 	for layer in filled_polygons:
@@ -51,11 +57,16 @@ def make_map(full_gdf):
 		m.add_gdf(
 			gdf,
 			layer_name=layer,
+			# highlight_function=lambda x: {"l":x['properties']['label']},
+			fields=['layer'],
+			highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 8, "color": "lightgreen"},
 			style={
 				# 'color':color,
 				'color':"none",
 				'fillColor':color,
 				"tooltip":"label",
+				
+
 				},
 				# tooltip="label",
 			zoom_to_layer=True,
@@ -69,6 +80,8 @@ def make_map(full_gdf):
 		m.add_gdf(
 			gdf,
 			layer_name=layer,
+			fields=['layer'],
+			highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 8, "color": "lightgreen"},
 			# tooltip="label",
 			style={'color': color},
 			)

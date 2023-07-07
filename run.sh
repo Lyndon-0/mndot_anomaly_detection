@@ -1,0 +1,2 @@
+cd "//ppeng.com/pzdata/docs/Project Resources/Ag Water/apps/aewsd_frick_unit/"
+/c/Users/Denver/AppData/Local/pypoetry/Cache/virtualenvs/streamlit-data-management-IpiZvBCw-py3.10/Scripts/python.exe -m streamlit run "//ppeng.com/pzdata/docs/Project Resources/Ag Water/apps/aewsd_frick_unit/app.py"

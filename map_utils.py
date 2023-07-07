@@ -39,7 +39,7 @@ def make_map(full_gdf):
 			layer_name=layer,
 						# style_function=lambda x: {"color": "red", "fillOpacity": 0},
 			fields=['layer'],
-			highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 8, "color": "lightgreen"},
+			highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 6, "color": "lightgreen"},
 			style={
 				'color':color,
 				'fillColor':"none",
@@ -59,7 +59,7 @@ def make_map(full_gdf):
 			layer_name=layer,
 			# highlight_function=lambda x: {"l":x['properties']['label']},
 			fields=['layer'],
-			highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 8, "color": "lightgreen"},
+			highlight_function=lambda x: {"fillOpacity": 0.4, "weight": 6, "color": "lightgreen"},
 			style={
 				# 'color':color,
 				'color':"none",
@@ -81,7 +81,7 @@ def make_map(full_gdf):
 			gdf,
 			layer_name=layer,
 			fields=['layer'],
-			highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 8, "color": "lightgreen"},
+			highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 6, "color": "lightgreen"},
 			# tooltip="label",
 			style={'color': color},
 			)

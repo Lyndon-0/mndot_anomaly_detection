@@ -81,4 +81,4 @@ M.map.add_legend(
 
 
 M.map.to_streamlit()
-st.markdown("Note: Turnout locations and pipeline sizes are subject to change depending upon input received from Landowners")
+st.markdown("Note: Turnout locations and pipeline sizes are subject to change depending upon input received from landowners")

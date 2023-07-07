@@ -1,6 +1,6 @@
 import folium
 import leafmap.foliumap as leafmap
-def make_map(full_gdf):
+def make_map(full_gdf,apns):
 	lines = ['Proposed Pipeline', 'AEWSD North Canal', 'FFPPP Discharge Pipeline',"AEWSD Alignments"]
 	filled_polygons = ['Frick Unit Service Area']
 	hollow_polygons = ['District Boundary']
@@ -100,6 +100,46 @@ def make_map(full_gdf):
 				# tooltip=[y["label"]],
 				tooltip="Proposed Turnout",
 				).add_to(m)
+	# add apns and labels
+	apn_gdf = clip(apns)
+	m.add_gdf(
+		apn_gdf,
+		# layer_name="APNs",
+		# style_function=lambda x: {"color": "red", "fillOpacity": 0},
+		fields=['APN_DASH'],
+		# highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 6, "color": "lightgreen"},
+		style={
+			'color':"white",
+			"weight":0.5,
+		},
+	)
+	m.add_labels(
+		apn_gdf,
+		# layer_name="APNs",
+		column="APN_DASH",
+		font_color="white",
+		font_size="12pt",
+		# font_family="courier new",
+		# font_weight="bold",
+		draggable=False,
+	)
+	# draw a leader line to the centroid of each apn
+
+
+
+	# for i,y in apn_gdf.iterrows():
+	# 	folium.Marker(
+	# 		location=[y.geometry.centroid.y,y.geometry.centroid.x],
+	# 		icon=folium.DivIcon(html=f"""
+	# 	       <div style="
+	# 	       font-family: courier new;
+	# 	       color: white;
+	# 	       font-size: 12pt;
+	# 	    #    background-color: #ff0000;
+	# 	    #    border: 1px solid red;
+	# 	       ">{y['APN_DASH']}</div>""")
+	# 		# icon=folium.DivIcon(html=f"""<div style="font-family: courier new; color: black">{y['APN_DASH']}</div>""")
+	# 		).add_to(m)
 	m.add_legend(
 		title="Legend",
 		legend_dict={

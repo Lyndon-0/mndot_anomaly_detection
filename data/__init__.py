@@ -1,2 +1,4 @@
 import geopandas as gpd
-gdf = gpd.read_parquet("data\\gdf.parquet")
+from pathlib import Path
+data_path = Path("data")
+gdf = gpd.read_parquet(data_path.joinpath("gdf.parquet"))

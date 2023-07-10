@@ -113,19 +113,20 @@ def make_map(full_gdf,apns):
 			"weight":0.5,
 		},
 	)
-	import streamlit as st
-	label_size = st.slider("Label Size",min_value=1,max_value=20,value=7)
-	m.add_labels(
-		apn_gdf,
-		# layer_name="APNs",
-		column="APN_DASH",
-		font_color="white",
-		# font_size="7pt",
-		font_size=f"{label_size}pt",
-		# font_family="courier new",
-		# font_weight="bold",
-		draggable=False,
-	)
+	# import streamlit as st
+	# label_size = st.slider("Label Size",min_value=1,max_value=20,value=7)
+	# # st.markdown()
+	# m.add_labels(
+	# 	apn_gdf,
+	# 	# layer_name="APNs",
+	# 	column="APN_DASH",
+	# 	font_color="white",
+	# 	# font_size="7pt",
+	# 	font_size=f"{label_size}pt",
+	# 	# font_family="courier new",
+	# 	# font_weight="bold",
+	# 	draggable=False,
+	# )
 	# draw a leader line to the centroid of each apn
 
 

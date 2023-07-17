@@ -3,3 +3,4 @@ from pathlib import Path
 data_path = Path("data")
 gdf = gpd.read_parquet(data_path.joinpath("gdf.parquet"))
 apns = gpd.read_parquet(data_path.joinpath("apns.parquet"))
+pipes = gpd.read_parquet(data_path.joinpath("pipes.parquet"))

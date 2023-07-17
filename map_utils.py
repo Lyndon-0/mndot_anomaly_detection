@@ -1,8 +1,14 @@
 import folium
 import leafmap.foliumap as leafmap
 import streamlit as st
-def make_map(full_gdf,apns):
-	lines = ['Proposed Pipeline', 'AEWSD North Canal', 'FFPPP Discharge Pipeline',"AEWSD Alignments"]
+
+def make_map(full_gdf,apns,pipes):
+	lines = [
+		# 'Proposed Pipeline',
+		'AEWSD North Canal',
+		'FFPPP Discharge Pipeline',
+		# "AEWSD Alignments",
+		]
 	filled_polygons = ['Frick Unit Service Area']
 	hollow_polygons = ['District Boundary']
 	points = ['Proposed Turnout']
@@ -105,7 +111,7 @@ def make_map(full_gdf,apns):
 	# st.dataframe(apn_gdf.drop(columns=['geometry']))
 	m.add_gdf(
 		apn_gdf,
-		# layer_name="APNs",
+		layer_name="APNs",
 		# style_function=lambda x: {"color": "red", "fillOpacity": 0},
 		fields=['APN','Acreage','Landowner'],
 		# highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 6, "color": "lightgreen"},
@@ -132,6 +138,7 @@ def make_map(full_gdf,apns):
 					tooltip="Proposed Turnout",
 					).add_to(m)
 			# add apns and labels
+			
 			
 		except:
 			st.markdown(f"Error with {layer}")
@@ -164,6 +171,21 @@ def make_map(full_gdf,apns):
 	# apn_gdf = clip(apns)
 	# apn_gdf = apns.to_crs("EPSG:4326")
 
+	gdf = pipes
+	# st.markdown(layer)
+	# st.markdown(gdf.crs)
+	# if layer in clip_layers:
+	# 	gdf = clip(gdf)
+		# intersect(gdf)
+	color = 'orange'
+	m.add_gdf(
+		gdf,
+		layer_name="Proposed Pipeline",
+		fields=['layer','label'],
+		highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 6, "color": "lightgreen"},
+		# tooltip="label",
+		style={'color': color},
+		)
 
 	m.add_legend(
 		title="Legend",

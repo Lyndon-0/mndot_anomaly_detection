@@ -156,7 +156,8 @@ def make_map(full_gdf,apns):
 				)
 
 		except:
-			st.markdown(f"Error with {layer}")
+			pass
+			# st.markdown(f"Error with {layer}")
 	# apns.crs = "EPSG:4326"
 	# st.markdown(apns.crs)
 	# apn_gdf = clip(apns.to_crs("EPSG:4326"))

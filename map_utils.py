@@ -3,6 +3,7 @@ import leafmap.foliumap as leafmap
 import streamlit as st
 
 def make_map(full_gdf,apns,pipes):
+	# st.dataframe(apns.drop(columns=['geometry']))
 	lines = [
 		# 'Proposed Pipeline',
 		'AEWSD North Canal',

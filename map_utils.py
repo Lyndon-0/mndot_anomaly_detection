@@ -1,6 +1,7 @@
 import folium
 import leafmap.foliumap as leafmap
 import streamlit as st
+from data import config
 
 def make_map(full_gdf,apns,pipes):
 	# st.dataframe(apns.drop(columns=['geometry']))

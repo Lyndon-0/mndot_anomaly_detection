@@ -11,8 +11,8 @@ def make_map(full_gdf,apns,pipes,config):
 		'Proposed Pipeline',
 	]
 	hidden_gdf_layers = [
-		'Frick Unit Service Area',
-		'Frick Unit Service Area 2',
+		# 'Frick Unit Service Area',
+		# 'Frick Unit Service Area 2',
 		'Groundwater Service Area',
 	]
 	get_type = lambda df,shape_type: df.loc[
@@ -64,6 +64,7 @@ def make_map(full_gdf,apns,pipes,config):
 				style={
 					'color':color,
 					'fillColor':"none",
+					'weight':y['size'],
 					},
 				)
 		except Exception as e:
@@ -90,11 +91,13 @@ def make_map(full_gdf,apns,pipes,config):
 				fields=['layer'],
 				highlight_function=lambda x: {"fillOpacity": 0.4, "weight": 6, "color": "lightgreen"},
 				style={
-					# 'color':color,
-					'color':"none",
+					'color':color,
+					# 'color':"none",
 					'fillColor':color,
 					"tooltip":"label",
 					"alpha":y['alpha'],
+					# 'weight':y['size'],
+					'weight':y['size'],
 					},
 					# tooltip="label",
 				zoom_to_layer=True,
@@ -112,8 +115,6 @@ def make_map(full_gdf,apns,pipes,config):
 	# apn_gdf = apns
 
 	apn_gdf['size'] = apn_gdf.geometry.area  
-	# apn_gdf = apns
-	# st.dataframe(apn_gdf.drop(columns=['geometry']))
 
 	m.add_gdf(
 		apn_gdf,
@@ -124,7 +125,9 @@ def make_map(full_gdf,apns,pipes,config):
 		# highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 6, "color": "lightgreen"},
 		style={
 			'color':"white",
-			"weight":0.5,
+			"weight":0.2,
+			"alpha":.05,
+
 		},
 	)
 	# for layer in points:
@@ -176,19 +179,9 @@ def make_map(full_gdf,apns,pipes,config):
 					'weight':y['size'],
 					},
 				)
-
-
 		except Exception as e:
 			st.markdown(f"Error with {layer}\n{e}")
-	# apns.crs = "EPSG:4326"
-	# st.markdown(apns.crs)
-	# apn_gdf = clip(apns.to_crs("EPSG:4326"))
-	# apn_gdf = clip(apns)
-	# apn_gdf = apns.to_crs("EPSG:4326")
 
-	# for i,row in get_type(df,"hollow_polygons"):
-	# # for layer in hollow_polygons:
-	# 	name = row['Name']
 	gdf = pipes
 	color = 'orange'
 	m.add_gdf(

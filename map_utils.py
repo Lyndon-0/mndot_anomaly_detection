@@ -2,7 +2,7 @@ import folium
 import leafmap.foliumap as leafmap
 import streamlit as st
 
-def make_map(full_gdf,apns,pipes,config):
+def make_map(full_gdf,apn_gdf,pipes,config):
 	df = config
 	# get_type = lambda df,shape_type: df.loc[df['shape_type'] == shape_type].iterrows()
 	
@@ -27,9 +27,8 @@ def make_map(full_gdf,apns,pipes,config):
 		# "AEWSD Alignments",
 		]
 	service_boundary = full_gdf.pipe(lambda df:df.loc[df['label'] == "Frick Unit North Service Area"])
-	intersect = lambda gdf: gdf[gdf.intersects(service_boundary.unary_union)]
+	# intersect = lambda gdf: gdf[gdf.intersects(service_boundary.unary_union)]
 	clip = lambda gdf: gdf.clip(service_boundary)
-	apns = apns.to_crs("EPSG:4326")
 	# find interescting shapes
 	# intersecting_apns = apns[apns.intersects(service_boundary.unary_union)]
 
@@ -51,6 +50,7 @@ def make_map(full_gdf,apns,pipes,config):
 		# st.dataframe(y)
 		try:
 			gdf = full_gdf[full_gdf['layer']==layer]
+				
 			if layer in clip_layers:
 				gdf = clip(gdf)
 				# gdf = intersect(gdf)
@@ -77,6 +77,8 @@ def make_map(full_gdf,apns,pipes,config):
 		# st.markdown(layer)
 		try:
 			gdf = full_gdf[full_gdf['layer']==layer]
+			if layer == 'Panama Unit Service Area':
+				gdf = gdf.loc[gdf['label'] != 'Frick Unit North Service Area']
 			if layer in clip_layers:
 				gdf = clip(gdf)
 				# gdf = intersect(gdf)
@@ -108,10 +110,10 @@ def make_map(full_gdf,apns,pipes,config):
 			# print(f"Error with {layer}")
 	
 	# intersecting_apns = apns[apns.intersects(service_boundary.unary_union)]
-	district_boundary = full_gdf.pipe(lambda df:df.loc[df['layer'] == "District Boundary"])
-	intersecting_apns = apns[apns.intersects(district_boundary.unary_union)]
-	# st.dataframe(intersecting_apns.drop(columns=['geometry']))
-	apn_gdf = intersecting_apns
+	# district_boundary = full_gdf.pipe(lambda df:df.loc[df['layer'] == "District Boundary"])
+	# intersecting_apns = apns[apns.intersects(district_boundary.unary_union)]
+	# # st.dataframe(intersecting_apns.drop(columns=['geometry']))
+	# apn_gdf = intersecting_apns
 	# apn_gdf = apns
 
 	apn_gdf['size'] = apn_gdf.geometry.area  
@@ -161,6 +163,8 @@ def make_map(full_gdf,apns,pipes,config):
 		# st.markdown(layer)
 		try:
 			gdf = full_gdf[full_gdf['layer']==layer]
+			if layer == 'Frick Unit Pipeline':
+				gdf = gdf.loc[gdf['label'] != 'Frick Unit']
 			# st.markdown(layer)
 			# st.markdown(gdf.crs)
 			if layer in clip_layers:
@@ -195,12 +199,15 @@ def make_map(full_gdf,apns,pipes,config):
 			'weight':4,
 			},
 		)
+	legend_dict = {
+			y['Name']:y['color'] for i,y in config.iterrows() if y['Name'] not in hidden_gdf_layers
+		}
+	# sort alphabetically
+	legend_dict = {k: v for k, v in sorted(legend_dict.items(), key=lambda item: item[0])}
 
 	m.add_legend(
 		title="Legend",
-		legend_dict={
-			y['Name']:y['color'] for i,y in config.iterrows() if y['Name'] not in hidden_gdf_layers
-		}
+		legend_dict=legend_dict,
 	)
 	m.zoom_to_gdf(
 		full_gdf[full_gdf['layer'] == "Proposed Pipeline"],

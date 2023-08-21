@@ -14,6 +14,7 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 		# 'Frick Unit Service Area',
 		# 'Frick Unit Service Area 2',
 		'Groundwater Service Area',
+		'TWCS',
 	]
 	get_type = lambda df,shape_type: df.loc[
 		(df['shape_type'] == shape_type) &
@@ -116,13 +117,19 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 	# apn_gdf = intersecting_apns
 	# apn_gdf = apns
 
-	apn_gdf['size'] = apn_gdf.geometry.area  
+	apn_gdf['size'] = apn_gdf.geometry.area
+	apn_gdf['Service Area Type'] = apn_gdf['service_area_type'].map({
+		"GW":"Groundwater",
+		"SW":"Surface Water",
+		"TW":"Temporary Water"
+	})
+
 
 	m.add_gdf(
 		apn_gdf,
 		layer_name="APNs",
 		# style_function=lambda x: {"color": "red", "fillOpacity": 0},
-		fields=['APN','Acreage','Landowner'],
+		fields=['APN','Acreage','Landowner','Service Area Type'],
 		# fields=['APN_DASH','ASSR_ACRES','GIS Landowner'],
 		# highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 6, "color": "lightgreen"},
 		style={

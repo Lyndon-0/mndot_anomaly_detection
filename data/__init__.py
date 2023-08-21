@@ -20,10 +20,9 @@ gdf = gpd.read_parquet(data_path.joinpath("gdf-2023-08-15.parquet"))
 # 		(df['label'] != 'Frick Unit')
 # 	]
 # )
-
-
 district_boundary = gdf.pipe(lambda df:df.loc[df['layer'] == "District Boundary"])
-apns = gpd.read_parquet(data_path.joinpath("apns.parquet")).to_crs("EPSG:4326")
-apn_gdf = apns[apns.intersects(district_boundary.unary_union)]
+# apns = gpd.read_parquet(data_path.joinpath("apns.parquet")).to_crs("EPSG:4326")
+# apn_gdf = apns[apns.intersects(district_boundary.unary_union)]
 
+apn_gdf = gpd.read_parquet(data_path.joinpath("apn_gdf_sa.parquet")).to_crs("EPSG:4326")
 pipes = gpd.read_parquet(data_path.joinpath("pipes.parquet"))

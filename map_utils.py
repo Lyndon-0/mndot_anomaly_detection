@@ -170,7 +170,7 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 		# st.markdown(layer)
 		try:
 			gdf = full_gdf[full_gdf['layer']==layer]
-			if layer == 'Frick Unit Pipeline':
+			if layer == 'Panama Unit Pipeline':
 				gdf = gdf.loc[gdf['label'] != 'Frick Unit']
 			# st.markdown(layer)
 			# st.markdown(gdf.crs)

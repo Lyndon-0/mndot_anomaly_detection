@@ -118,11 +118,11 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 	# apn_gdf = apns
 
 	apn_gdf['size'] = apn_gdf.geometry.area
-	apn_gdf['Service Area Type'] = apn_gdf['service_area_type'].map({
-		"GW":"Groundwater",
-		"SW":"Surface Water",
-		"TW":"Temporary Water"
-	})
+	# apn_gdf['Service Area Type'] = apn_gdf['service_area_type'].map({
+	# 	"GW":"Groundwater",
+	# 	"SW":"Surface Water",
+	# 	"TW":"Temporary Water"
+	# })
 
 
 	m.add_gdf(

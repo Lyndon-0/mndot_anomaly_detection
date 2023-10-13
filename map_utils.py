@@ -69,7 +69,7 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 					},
 				)
 		except Exception as e:
-			st.markdown(f"Error with {layer}\n{e}")
+			st.markdown(f"Error with {layer}\n'{e}'")
 			# print(f"Error with {layer}")
 
 	# for layer in filled_polygons:
@@ -107,7 +107,7 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 				)
 
 		except Exception as e:
-			st.markdown(f"Error with {layer}\n{e}")
+			st.markdown(f"Error with {layer}\n'{e}'")
 			# print(f"Error with {layer}")
 	
 	# intersecting_apns = apns[apns.intersects(service_boundary.unary_union)]
@@ -161,7 +161,7 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 			# add apns and labels
 			
 		except:
-			st.markdown(f"Error with {layer}")
+			st.markdown(f"Error with {layer}\n'{e}'")
 
 
 	# for layer in lines:
@@ -191,7 +191,7 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 					},
 				)
 		except Exception as e:
-			st.markdown(f"Error with {layer}\n{e}")
+			st.markdown(f"Error with {layer}\n'{e}'")
 
 	gdf = pipes
 	color = 'orange'

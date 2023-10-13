@@ -160,7 +160,7 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 					).add_to(m)
 			# add apns and labels
 			
-		except:
+		except Exception as e:
 			st.markdown(f"Error with {layer}\n'{e}'")
 
 

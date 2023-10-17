@@ -8,7 +8,7 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 	
 	non_gdf_layers = [
 		'APNs',
-		'Proposed Pipeline',
+		# 'Proposed Pipeline',
 	]
 	hidden_gdf_layers = [
 		# 'Frick Unit Service Area',
@@ -167,6 +167,7 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 			st.markdown(f"Error with {layer}\n'{e}'")
 
 
+
 	# for layer in lines:
 	for i,y in get_type(df,"line"):
 		layer = y['Name']
@@ -196,19 +197,21 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 		except Exception as e:
 			st.markdown(f"Error with {layer}\n'{e}'")
 
-	gdf = pipes
-	color = 'orange'
-	m.add_gdf(
-		gdf,
-		layer_name="Proposed Pipeline",
-		fields=['layer','label'],
-		highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 6, "color": "lightgreen"},
-		# tooltip="label",
-		style={
-			'color': color,
-			'weight':4,
-			},
-		)
+	# gdf = pipes
+	# color = 'orange'
+	# m.add_gdf(
+	# 	gdf,
+	# 	layer_name="Proposed Pipeline",
+	# 	fields=['layer','label'],
+	# 	highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 6, "color": "lightgreen"},
+	# 	# tooltip="label",
+	# 	style={
+	# 		'color': color,
+	# 		'weight':4,
+	# 		},
+	# 	)
+	
+
 	legend_dict = {
 			y['Name']:y['color'] for i,y in config.iterrows() if y['Name'] not in hidden_gdf_layers
 		}

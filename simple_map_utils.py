@@ -6,7 +6,7 @@ import streamlit as st
 def make_map(full_gdf,apns,pipes,config):
 	# st.dataframe(apns.drop(columns=['geometry']))
 	lines = [
-		# 'Proposed Pipeline',
+		'Proposed Pipeline',
 		'AEWSD North Canal',
 		'FFPPP Discharge Pipeline',
 		# "AEWSD Alignments",
@@ -179,15 +179,17 @@ def make_map(full_gdf,apns,pipes,config):
 	# if layer in clip_layers:
 	# 	gdf = clip(gdf)
 		# intersect(gdf)
-	color = 'orange'
-	m.add_gdf(
-		gdf,
-		layer_name="Proposed Pipeline",
-		fields=['layer','label'],
-		highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 6, "color": "lightgreen"},
-		# tooltip="label",
-		style={'color': color},
-		)
+
+
+	# color = 'orange'
+	# m.add_gdf(
+	# 	gdf,
+	# 	layer_name="Proposed Pipeline",
+	# 	fields=['layer','label'],
+	# 	highlight_function=lambda x: {"fillOpacity": 0.7, "weight": 6, "color": "lightgreen"},
+	# 	# tooltip="label",
+	# 	style={'color': color},
+	# 	)
 
 	m.add_legend(
 		title="Legend",

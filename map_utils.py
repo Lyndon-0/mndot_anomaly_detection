@@ -139,6 +139,7 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 
 		},
 	)
+	
 	# for layer in points:
 	for i,y in get_type(df,"point"):
 		layer = y['Name']
@@ -149,7 +150,9 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 				gdf = clip(gdf)
 				# intersect(gdf)
 			color = gdf['color'].unique()[0]
+			# size = gdf['size'].unique()[0]
 			for i,y in gdf.iterrows():
+				# st.dataframe(y)
 				folium.Circle(
 					radius=y['size'],
 					location=[y.geometry.y,y.geometry.x],

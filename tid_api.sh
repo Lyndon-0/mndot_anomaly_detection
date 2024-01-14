@@ -1,0 +1,2 @@
+cd "//ppeng.com/pzdata/docs/Project Resources/Ag Water/apps/district_management/api"
+/c/Users/Denver/AppData/Local/pypoetry/Cache/virtualenvs/db-fZPbdIQk-py3.10/Scripts/python.exe -m uvicorn main:app --reload

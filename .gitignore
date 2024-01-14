@@ -4,3 +4,8 @@ data/FrickUnit_Outreach
 data/TWSC_2023
 *.html
 *.pyc
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

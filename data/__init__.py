@@ -2,7 +2,12 @@ import geopandas as gpd
 from pathlib import Path
 import pandas as pd
 
-data_path = Path("data")
+data_path = Path(
+	# "data"
+	__file__
+	# "G:\Arvin-Edison WSD-1215\121523003-Frick Unit Pipeline\400 GIS\Scripts\aewsd_frick_unit\data"
+	).parent
+print("data_path", data_path)
 config = pd.read_excel(data_path.joinpath('config.xlsx'), sheet_name='layers').dropna(subset=['display'])
 
 # filter out the following

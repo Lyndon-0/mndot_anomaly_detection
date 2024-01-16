@@ -19,8 +19,17 @@ config = pd.read_excel(data_path.joinpath('config.xlsx'), sheet_name='layers').d
 # df['layer'] == 'Panama Unit Service Area' & df['label'] == 'Frick Unit North Service Area'
 # df['layer'] == 'Frick Unit Pipeline' & df['label'] == 'Frick Unit'
 # gdf = gpd.read_parquet(data_path.joinpath("gdf-2023-08-15.parquet"))
-gdf = gpd.read_parquet(data_path.joinpath("gdf-2024-01-15.parquet"))
 
+# grab newest parquet file
+gdf_file = sorted(
+				data_path.glob("gdf-*.parquet"),
+				reverse=True,
+				key=lambda x:x.stem)[0]
+				
+gdf = gpd.read_parquet(
+	gdf_file
+	# data_path.joinpath("gdf-2024-01-16.parquet")
+	)
 
 
 

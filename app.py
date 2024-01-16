@@ -9,5 +9,7 @@ st.title("Frick Unit Map")
 
 # st.dataframe(apns.drop(columns=['geometry']))
 m = make_map(gdf,apn_gdf,pipes,config)
-m.to_streamlit()
+m.to_streamlit(
+	height=800,
+)
 st.markdown("Note: Turnout locations and pipeline sizes are subject to change depending upon landowner input and field surveys.")

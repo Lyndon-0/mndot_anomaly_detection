@@ -3,6 +3,7 @@ from pathlib import Path
 import pandas as pd
 from loguru import logger
 import sys
+
 logger.remove()
 logger.add(sys.stderr, level="INFO")
 
@@ -25,12 +26,12 @@ gdf_file = sorted(
 				data_path.glob("gdf-*.parquet"),
 				reverse=True,
 				key=lambda x:x.stem)[0]
-				
+
 gdf = gpd.read_parquet(
 	gdf_file
 	# data_path.joinpath("gdf-2024-01-16.parquet")
 	)
-
+logger.log("INFO", f"loaded {gdf_file}")
 
 
 district_boundary = gdf.pipe(lambda df:df.loc[df['layer'] == "District Boundary"])

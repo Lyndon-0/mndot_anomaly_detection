@@ -1,6 +1,7 @@
 import folium
 import leafmap.foliumap as leafmap
 import streamlit as st
+from logger import logger
 
 def make_map(full_gdf,apn_gdf,pipes,config):
 	df = config
@@ -69,7 +70,9 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 					},
 				)
 		except Exception as e:
-			st.markdown(f"Error with {layer}\n'{e}'")
+			error_msg = f"Error with {layer}\n'{e}'"
+			logger.error(error_msg)
+			st.markdown(error_msg)
 			# print(f"Error with {layer}")
 
 	# for layer in filled_polygons:
@@ -107,6 +110,8 @@ def make_map(full_gdf,apn_gdf,pipes,config):
 				)
 
 		except Exception as e:
+			error_msg = f"Error with {layer}\n'{e}'"
+			logger.error(error_msg)
 			st.markdown(f"Error with {layer}\n'{e}'")
 			# print(f"Error with {layer}")
 	

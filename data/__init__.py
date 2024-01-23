@@ -14,29 +14,44 @@ data_path = Path(
 	).parent
 logger.info(f"data_path: {data_path}")
 
-config = pd.read_excel(data_path.joinpath('config.xlsx'), sheet_name='layers').dropna(subset=['display'])
+
+def get_config(sheet_name):
+	dfs = pd.read_excel(data_path.joinpath('config.xlsx'), sheet_name=None)
+	return pd.merge(
+		dfs[sheet_name].dropna(subset="id").drop(columns="Name"),
+		dfs['Layers'],
+		how="left",
+		on='id',
+	).iloc[::-1]
+
 
 # filter out the following
 # df['layer'] == 'Panama Unit Service Area' & df['label'] == 'Frick Unit North Service Area'
 # df['layer'] == 'Frick Unit Pipeline' & df['label'] == 'Frick Unit'
 # gdf = gpd.read_parquet(data_path.joinpath("gdf-2023-08-15.parquet"))
 
-# grab newest parquet file
-gdf_file = sorted(
-				data_path.glob("gdf-*.parquet"),
-				reverse=True,
-				key=lambda x:x.stem)[0]
-
-gdf = gpd.read_parquet(
-	gdf_file
-	# data_path.joinpath("gdf-2024-01-16.parquet")
+def get_gdf(sheet_name):
+	return gpd.read_parquet(
+	sorted(
+		data_path.glob(f"{sheet_name}-*.parquet"),
+		reverse=True,
+		key=lambda x:x.stem)[0]
 	)
-logger.log("INFO", f"loaded {gdf_file}")
+# grab newest parquet file
+# simple_file = 
+
+# full_file = sorted(
+# 				data_path.glob("gdf-*.parquet"),
+# 				reverse=True,
+# 				key=lambda x:x.stem)[0]
 
 
-district_boundary = gdf.pipe(lambda df:df.loc[df['layer'] == "District Boundary"])
+# logger.log("INFO", f"loaded {gdf_file}")
+
+
+# district_boundary = gdf.pipe(lambda df:df.loc[df['layer'] == "District Boundary"])
 # apns = gpd.read_parquet(data_path.joinpath("apns.parquet")).to_crs("EPSG:4326")
 # apn_gdf = apns[apns.intersects(district_boundary.unary_union)]
 
-apn_gdf = gpd.read_parquet(data_path.joinpath("apn_gdf_sa.parquet")).to_crs("EPSG:4326")
-pipes = gpd.read_parquet(data_path.joinpath("pipes.parquet"))
+# apn_gdf = gpd.read_parquet(data_path.joinpath("apn_gdf_sa.parquet")).to_crs("EPSG:4326")
+# pipes = gpd.read_parquet(data_path.joinpath("pipes.parquet"))

@@ -11,14 +11,18 @@ def make_map(full_gdf,apns,pipes,config):
 		'FFPPP Discharge Pipeline',
 		# "AEWSD Alignments",
 		]
-	filled_polygons = ['Frick Unit Service Area']
+	filled_polygons = [
+		'Frick Unit Service Area',
+		"Pipeline ESMT",
+		]
 	hollow_polygons = ['District Boundary']
 	points = ['Proposed Turnout']
 
 	clip_layers = [
 		'Proposed Turnout',
 		# 'Proposed Pipeline',
-		"Frick Unit Service Area",
+		#!
+		# "Frick Unit Service Area",
 		# "AEWSD Alignments",
 		]
 	service_boundary = full_gdf.pipe(lambda df:df.loc[df['label'] == "Frick Unit North Service Area"])

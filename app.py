@@ -2,7 +2,7 @@ import streamlit as st
 from pathlib import Path
 
 from data import gdf,apn_gdf,pipes,config
-from util.map_utils import make_map
+from util.full_map_utils import make_map
 st.set_page_config(layout="wide", page_title="Frick Unit Map", page_icon="💧",)
 st.title("Frick Unit Map")
 

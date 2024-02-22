@@ -3,13 +3,23 @@ import pandas as pd
 from pathlib import Path
 import sys
 from loguru import logger
+import arrow
+
 
 logger.remove()
 logger.add(sys.stderr, level="INFO")
 data_path = Path("../data")
 # data_path = Path('data')
 config = pd.read_excel(data_path / "config.xlsx", sheet_name="layers")
-config.tail(3)
+# config.tail(3)
+
+service_boundary_row = config.pipe(lambda df:df.loc[df['label'] == "Frick Unit North Service Area"])
+service_boundary = gpd.read_file(Path(service_boundary_row['shp'].values[0]))
+
+intersect = lambda gdf: gdf[gdf.intersects(service_boundary.unary_union)]
+clip = lambda gdf: gdf.clip(service_boundary)
+
+
 
 def get_layer(row):
     try:
@@ -35,6 +45,12 @@ def get_layer(row):
             gdf["size"] = row["size"]
             # print(row['Name'])
             # print(gdf.crs)
+            if row['clip_to_frick']:
+                gdf = clip(gdf)
+			if row['Name'] == 'Panama Unit Service Area':
+				gdf = gdf.loc[gdf['label'] != 'Frick Unit North Service Area']
+			if row['Name'] == 'Panama Unit Pipeline':
+				gdf = gdf.loc[gdf['label'] != 'Frick Unit']
 
             return gdf[
                 ["color", "label", "layer", "size", "geometry"]
@@ -58,7 +74,6 @@ epsg = 4326
 # epsg = 26745
 # epsg = 2229
 # epsg = 6424
-import arrow
 
 gdf = pd.concat([gdf.to_crs(epsg=epsg) for gdf in gdfs.values() if gdf is not None])
 

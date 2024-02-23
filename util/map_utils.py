@@ -87,6 +87,17 @@ def plot_map(full_gdf, config):
                     # tooltip="label",
                     zoom_to_layer=True,
                 )
+            # if y["shape_type"] == "point":
+            #     for row, y_gdf in gdf.iterrows():
+            #         # st.dataframe(y)
+            #         folium.Circle(
+            #             radius=y["size"],
+            #             location=[y_gdf.geometry.y, y_gdf.geometry.x],
+            #             color=y["color"],
+            #             fill=True,
+            #             # fields=["label"],
+            #             tooltip=f"<b>Layer: </b>{y['Name']}<br><b>Label: </b>{y_gdf['label']}",
+            #         ).add_to(m)
 
             if y["shape_type"] == "point":
                 for row, y_gdf in gdf.iterrows():

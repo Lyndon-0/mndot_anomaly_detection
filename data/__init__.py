@@ -31,12 +31,14 @@ def get_config(sheet_name):
 # gdf = gpd.read_parquet(data_path.joinpath("gdf-2023-08-15.parquet"))
 
 def get_gdf(sheet_name):
+	# nan to none
 	return gpd.read_parquet(
 	sorted(
 		data_path.glob(f"{sheet_name}-*.parquet"),
 		reverse=True,
 		key=lambda x:x.stem)[0]
-	)
+	)#.pipe(lambda df: df.where(pd.notnull(df), None))
+
 # grab newest parquet file
 # simple_file = 
 

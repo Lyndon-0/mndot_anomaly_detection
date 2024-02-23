@@ -87,19 +87,28 @@ def plot_map(full_gdf, config):
                     # tooltip="label",
                     zoom_to_layer=True,
                 )
-            # if y["shape_type"] == "point":
-            #     for row, y_gdf in gdf.iterrows():
-            #         # st.dataframe(y)
-            #         folium.Circle(
-            #             radius=y["size"],
-            #             location=[y_gdf.geometry.y, y_gdf.geometry.x],
-            #             color=y["color"],
-            #             fill=True,
-            #             # fields=["label"],
-            #             tooltip=f"<b>Layer: </b>{y['Name']}<br><b>Label: </b>{y_gdf['label']}",
-            #         ).add_to(m)
+
 
             if y["shape_type"] == "point":
+
+                # logger.info(f"point: {y}")
+                # folium.features.CustomIcon(icon_url,icon_size=(28, 30))
+                # if type(y["custom_icon"]) == str:          
+                #     for row, y_gdf in gdf.iterrows():
+                #         folium.R(
+                #             location=[y_gdf.geometry.y, y_gdf.geometry.x],
+                #             tooltip=f"<b>Layer: </b>{y['Name']}<br><b>Label: </b>{y_gdf['label']}",
+                #             icon=folium.CustomIcon(
+                #                     icon_image=y["custom_icon"],
+                #                     icon_size=(20,20),
+                #                 ) ,
+                #             # icon=folium.DivIcon(
+                #             #         html=f'{y["custom_icon"]}',
+                #             #         icon_size=(20,20),
+                #             #     ) ,
+                #         ).add_to(m)
+
+                # else:
                 for row, y_gdf in gdf.iterrows():
                     # st.dataframe(y)
                     folium.Circle(
@@ -107,6 +116,7 @@ def plot_map(full_gdf, config):
                         location=[y_gdf.geometry.y, y_gdf.geometry.x],
                         color=y["color"],
                         fill=True,
+                        # icon=icon,
                         # fields=["label"],
                         tooltip=f"<b>Layer: </b>{y['Name']}<br><b>Label: </b>{y_gdf['label']}",
                     ).add_to(m)

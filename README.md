@@ -1,5 +1,4 @@
-# MnDOT Detector Monitor — I-94 MVP
-
+# MnDOT Detector Monitor
 This Streamlit dashboard visualizes real-time and historical MnDOT detector data.
 
 ### Features
